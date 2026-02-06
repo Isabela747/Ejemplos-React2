@@ -1,5 +1,5 @@
 import miImagen from './assets/Logito.png';
-import facebook from './assets/facebook.png';
+import face from './assets/face.png';
 import instagram from './assets/insta.png';
 import x from './assets/wass.png';
 import youtube from './assets/youtube.png';
@@ -44,7 +44,7 @@ function Redes(){
     return (
         <div className='redesDiv'>
             <ul>
-                <li><a href=''><img src={facebook} alt='Logotipo'/></a></li>
+                <li><a href=''><img src={face} alt='Logotipo'/></a></li>
                 <li><a href=''><img src={instagram} alt='Logotipo'/></a></li>
                 <li><a href=''><img src={x} alt='Logotipo'/></a></li>
                 <li><a href=''><img src={youtube} alt='Logotipo'/></a></li>

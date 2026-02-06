@@ -19,7 +19,7 @@
 
 .productoCard {
   width: 220px;
-  background: white;
+  background-color: hsl(194, 100%, 95%);
   border-radius: 6px;
   padding: 10px;
   box-shadow: rgba(0, 0, 0, 0.08) 0px 2px 4px;
