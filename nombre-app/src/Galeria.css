@@ -1,0 +1,30 @@
+.galeriaSection {
+  width: 80%;
+  margin: 20px auto;
+}
+
+.galeriaSection h2 {
+  text-align: center;
+  color: #ffffff;
+  margin-bottom: 20px;
+}
+
+.galeriaGrid {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.galeriaGrid img {
+  width: 280px;
+  height: 160px;
+  object-fit: cover;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: transform 0.3s ease;
+}
+
+.galeriaGrid img:hover {
+  transform: scale(1.05);
+}

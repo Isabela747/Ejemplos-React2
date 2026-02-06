@@ -1,0 +1,29 @@
+.sucursalesSection {
+  width: 80%;
+  margin: 20px auto;
+}
+
+.sucursalesSection h2 {
+  text-align: center;
+  color: #ffffff;
+  margin-bottom: 20px;
+}
+
+.sucursalesSection ul {
+  padding-left: 18px;
+  list-style: none;
+}
+
+.sucursalesSection li {
+  margin-bottom: 15px;
+  color: #ffffff;
+  font-size: 16px;
+  line-height: 1.6;
+}
+
+.sucursalesSection li:before {
+  content: "•";
+  color: #ffffff;
+  margin-right: 8px;
+}
+
