@@ -6,6 +6,7 @@ import youtube from './assets/youtube.png';
 import linkedin from './assets/link.png';
 import './Encabezado.css'
 import PropTypes from 'prop-types';
+import Clima from './clima';
 
 function Encabezado({cambiarVista}){
     return (
@@ -50,7 +51,11 @@ function Redes(){
                 <li><a href=''><img src={youtube} alt='Logotipo'/></a></li>
                 <li><a href=''><img src={linkedin} alt='Logotipo'/></a></li>
             </ul>
+            <Clima />
+
+             
         </div>
+        
     )
 }
 Menu.propTypes = {
