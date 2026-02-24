@@ -1,0 +1,54 @@
+/* Estilos básicos para el formulario de registro de productos */
+.contenedorRegistro {
+	padding: 24px;
+	max-width: 700px;
+	margin: 24px auto;
+	background: #ffffff;
+	border-radius: 8px;
+	box-shadow: 0 6px 18px rgba(0, 0, 0, 0.06);
+}
+
+.contenedorRegistro h1 {
+	text-align: center;
+	color: #333;
+	margin-bottom: 16px;
+}
+
+.formRegistro {
+	display: flex;
+	flex-direction: column;
+	gap: 12px;
+}
+
+.inputRegistro {
+	padding: 10px 12px;
+	border: 1px solid #ddd;
+	border-radius: 6px;
+	font-size: 14px;
+	width: 100%;
+	box-sizing: border-box;
+}
+
+.textareaRegistro {
+	min-height: 100px;
+	resize: vertical;
+}
+
+.btnRegistro {
+	padding: 10px 14px;
+	background: #4c5388;
+	color: white;
+	border: none;
+	border-radius: 6px;
+	cursor: pointer;
+	font-weight: 600;
+}
+
+.btnRegistro:disabled {
+	opacity: 0.7;
+	cursor: not-allowed;
+}
+
+@media (max-width: 480px) {
+	.contenedorRegistro { padding: 16px; }
+}

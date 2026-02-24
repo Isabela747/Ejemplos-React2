@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import api from './Services/api'
 import './Productos.css'
+import RegistrarProductos from './RegistrarProducto';
 
 function Productos() {
  
@@ -26,6 +27,7 @@ function Productos() {
 
   return (
     <div>
+      <RegistrarProductos />
       <main className='classMain'>
         <header>
           <h1>Nuestro Catalogo</h1>
