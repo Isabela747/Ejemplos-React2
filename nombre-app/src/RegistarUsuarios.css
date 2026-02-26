@@ -1,0 +1,35 @@
+
+.formUsuario {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 10px;
+	margin-bottom: 24px;
+	justify-content: center;
+}
+
+.inputUsuario {
+	padding: 8px 12px;
+	border: 1px solid #ccc;
+	border-radius: 4px;
+	width: 200px;
+}
+
+.btnRegistrarUsuario {
+	padding: 8px 16px;
+	background-color: #28a745;
+	color: white;
+	border: none;
+	border-radius: 4px;
+	cursor: pointer;
+	transition: background-color 0.3s;
+}
+
+.btnRegistrarUsuario:disabled {
+	background-color: #6c757d;
+	cursor: not-allowed;
+}
+
+.btnRegistrarUsuario:hover:not(:disabled) {
+	background-color: #218838;
+}
+

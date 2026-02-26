@@ -18,11 +18,11 @@ function MapaGeolocalizacion() {
 
         )
     }, [])
-    return (
-        <LoadScript googleMapsApiKey={import.meta.env.VITE_GOOGLE_MAPS_API_KEY}>
+        return (
+            <LoadScript googleMapsApiKey={import.meta.env.VITE_GOOGLE_MAPS_API_KEY}>
             {ubicacion && (
                 <GoogleMap
-                    mapContainerStyle={{ width: "100Ppx", height: "300px" }}
+                        mapContainerStyle={{ width: "100%", height: "300px" }}
                     center={ubicacion}
                     zoom={15}
                 >

@@ -9,6 +9,7 @@ import Productos from './Productos'
 import Galeria from './Galeria'
 import Sucursales from './Sucursales'
 import Usuarios from './Usuarios'
+import Carrito from './Carrito'
 
 function Tarjetas({vista}){
     const vistas={
@@ -18,6 +19,7 @@ function Tarjetas({vista}){
         Galeria: <Galeria />,
         Sucursales: <Sucursales />,
         Usuarios: <Usuarios />,
+        Carritos: <Carrito />,
         Contacto: <Contacto />
     }
     return (
