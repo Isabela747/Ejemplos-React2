@@ -3,54 +3,51 @@ import api from './Services/api'
 import './Carrito.css'
 
 function Carrito() {
-	const [carts, setCarts] = useState([])
-	const [loading, setLoading] = useState(true)
 
-	useEffect(() => {
-		const obtenerCarritos = async () => {
-			try {
-				const response = await api.get('carts')
-				setCarts(response.data)
-			} catch (error) {
-				console.error('Error al obtener los carritos:', error)
-			} finally {
-				setLoading(false)
-			}
-		}
-		obtenerCarritos()
-	}, [])
+	const [ordenes, setOrdenes] = useState([]);
+    const [loading, setLoading] = useState(true);
 
-	if (loading) {
-		return <p>Cargando carritos...</p>
-	}
+    useEffect(() => {
+        const obtenerOrdenes = async () => {
+            try {
+                const response = await api.get("carts");
+                setOrdenes(response.data);
+            } catch (error) {
+                console.error('Error al obtener las órdenes:', error);
+            } finally {
+                setLoading(false);
+            }
+        };
+        obtenerOrdenes();
+    }, []);
 
-	return (
-		<div className="contenedorCarrito">
-			<h1>Carritos</h1>
-			{carts.map((cart) => {
-				const totalProductos = cart.products?.reduce((sum, p) => sum + p.quantity, 0) || 0
-				const fecha = new Date(cart.date).toLocaleDateString()
-				return (
-					<div key={cart.id} className="cartItem">
-						<p><strong>ID:</strong> {cart.id}</p>
-						<p><strong>Usuario:</strong> {cart.userId}</p>
-						<p><strong>Fecha:</strong> {fecha}</p>
-						<p><strong>Productos:</strong> {totalProductos}</p>
-						{cart.products && cart.products.length > 0 && (
-							<div className="productsList">
-								<h4>Detalles de productos</h4>
-								{cart.products.map((p) => (
-									<div key={p.productId} className="productEntry">
-										<span>ID #{p.productId}</span> &times; {p.quantity}
-									</div>
-								))}
-							</div>
-						)}
-					</div>
-				)
-			})}
-		</div>
-	)
+    if (loading) {
+        return <p>Cargando Pedidos...</p>
+    }
+
+    return(
+        <div className="contenedorCarrito">
+            <h1>Carrito de Compras</h1>
+            <p>Aquí podrás ver los pedidos y sus productos.</p>
+
+            {ordenes.map((orden) => (
+                    <div key={orden.id} className="orden-container">
+                    <h3>Pedido #{orden.id}</h3>
+                    <p><strong>Usuario:</strong> {orden.userId}</p>
+                    <p><strong>Fecha:</strong> {new Date(orden.date).toLocaleDateString()}</p>
+                    
+                    <h4>Productos:</h4>
+                    <ul>
+                        {orden.products.map((producto) => (
+                            <li key={producto.productId}>
+                                Producto ID: {producto.productId} - Cantidad: {producto.quantity}
+                            </li>
+                        ))}
+                    </ul>
+                </div>
+            ))}
+        </div>
+    );
 }
 
 export default Carrito;

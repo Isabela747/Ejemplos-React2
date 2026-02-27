@@ -40,3 +40,29 @@
 	color: #444;
 	margin: 2px 0;
 }
+
+/* estilos para cada orden/ pedido */
+.orden-container {
+	background: #fff;
+	border: 1px solid #ccc;
+	border-radius: 6px;
+	padding: 16px;
+	margin-bottom: 16px;
+	box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+}
+.orden-container h3 {
+	margin-top: 0;
+	color: #333;
+}
+.orden-container p {
+	margin: 4px 0;
+	color: #555;
+}
+.orden-container ul {
+	padding-left: 20px;
+	margin: 8px 0 0;
+}
+.orden-container li {
+	font-size: 0.9rem;
+	color: #444;
+}

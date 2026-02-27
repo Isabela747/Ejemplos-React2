@@ -1,11 +1,11 @@
 .contenedorUsuarios {
     padding: 20px;
-    max-width: 1200px;
+    max-width: 1400px;
     margin: 0 auto;
 }
 
 .contenedorUsuarios h1 {
-    color: #ffffff;
+    color: #000000;
     margin-bottom: 20px;
     text-align: center;
 }

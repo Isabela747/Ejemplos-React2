@@ -1,35 +1,81 @@
 
-.formUsuario {
-	display: flex;
-	flex-wrap: wrap;
-	gap: 10px;
-	margin-bottom: 24px;
-	justify-content: center;
+body {
+    margin: 0;
+    background-color: #4e73a1;
+    font-family: Arial, Helvetica, sans-serif;
 }
 
-.inputUsuario {
-	padding: 8px 12px;
+/* contenedor */
+.contenedorUsuarios {
+    max-width: 900px;
+    margin: 60px auto;
+    padding: 22px;
+    background: #4e73a1;
+    border-radius: 10px;
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.15);
+}
+
+.formUsuario.inputUsuario {
+	width: 100%;
+	padding: 10px;
+	margin-bottom: 15px;
+	border-radius: 6px;
 	border: 1px solid #ccc;
-	border-radius: 4px;
-	width: 200px;
+	font-size: 14px;
+
+	
 }
 
+
+
+/* Título */
+.contenedorUsuarios h2 {
+    text-align: center;
+    margin-bottom: 18px;
+    font-size: 18px;
+	
+    color: #333;
+}
+
+/* Formulario */
+.formUsuario {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+/* Inputs */
+.inputUsuario {
+    width: 100%;
+    padding: 9px 10px;
+    font-size: 13px;
+    border-radius: 6px;
+    border: 1px solid #ccc;
+    outline: none;
+    transition: 0.2s ease;
+}
+
+.inputUsuario:focus {
+    border-color: #4a90e2;
+}
+
+/* Botón */
 .btnRegistrarUsuario {
-	padding: 8px 16px;
-	background-color: #28a745;
-	color: white;
-	border: none;
-	border-radius: 4px;
-	cursor: pointer;
-	transition: background-color 0.3s;
+    padding: 9px;
+    border-radius: 6px;
+    border: none;
+    background-color: #4a90e2;
+    color: white;
+    font-weight: 600;
+    cursor: pointer;
+    transition: 0.2s ease;
+}
+
+.btnRegistrarUsuario:hover {
+    background-color: #357abd;
 }
 
 .btnRegistrarUsuario:disabled {
-	background-color: #6c757d;
-	cursor: not-allowed;
+    background-color: #9bbce0;
+    cursor: not-allowed;
 }
-
-.btnRegistrarUsuario:hover:not(:disabled) {
-	background-color: #218838;
-}
-

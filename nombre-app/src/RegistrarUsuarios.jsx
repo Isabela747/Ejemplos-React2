@@ -1,92 +1,117 @@
 import React, { useState } from 'react';
 import api from './Services/api';
-import './RegistrarProducto.css';
+import './RegistarUsuarios.css';
 
-function RegistrarProducto() {
-    const [title, setTitle] = useState('');
-    const [price, setPrice] = useState('');
-    const [description, setDescription] = useState('');
-    const [category, setCategory] = useState('');
-    const [image, setImage] = useState('');
-    const [loading, setLoading] = useState(false);
+function RegistrarUsuarios({ onRegister }) {
+    const [firstName, setFirstName] = useState('');
+    const [lastName, setLastName] = useState('');
+    const [email, setEmail] = useState('');
+    const [phone, setPhone] = useState('');
+    const [street, setStreet] = useState('');
+    const [city, setCity] = useState('');
+    const [saving, setSaving] = useState(false);
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        const nuevoProducto = {
-            title,
-            price: parseFloat(price) || 0,
-            description,
-            category,
-            image,
+
+        const nuevoUsuario = {
+            name: {
+                firstname: firstName,
+                lastname: lastName,
+            },
+            email,
+            phone,
+            address: {
+                street,
+                city,
+            },
         };
 
         try {
-            setLoading(true);
-            const respuesta = await api.post('/products', nuevoProducto);
-            console.log('Producto registrado:', respuesta.data);
-            alert('¡Producto guardado exitosamente!');
-            setTitle('');
-            setPrice('');
-            setDescription('');
-            setCategory('');
-            setImage('');
+            setSaving(true);
+            const resp = await api.post('/users', nuevoUsuario);
+            console.log('Usuario registrado:', resp.data);
+            alert('¡Usuario registrado exitosamente!');
+         
+            if (onRegister) {
+                onRegister(resp.data);
+            }
+            
+            setFirstName('');
+            setLastName('');
+            setEmail('');
+            setPhone('');
+            setStreet('');
+            setCity('');
         } catch (error) {
-            console.error('Error al registrar el producto:', error);
-            alert('Error al guardar el producto');
+            console.error('Error al registrar el usuario:', error);
+            alert('No se pudo registrar el usuario.');
         } finally {
-            setLoading(false);
+            setSaving(false);
         }
     };
 
     return (
-        <div className="contenedorRegistro">
-            <h1>Registrar Producto</h1>
-            <form className="formRegistro" onSubmit={handleSubmit}>
+        <div className="contenedorUsuarios">
+            <h2>Registrar Usuario</h2>
+
+            
+            <form className="formUsuario" onSubmit={handleSubmit}>
                 <input
-                    className="inputRegistro"
+                    className="inputUsuario"
                     type="text"
-                    placeholder="Título"
-                    value={title}
-                    onChange={(e) => setTitle(e.target.value)}
+                    placeholder="Nombre"
+                    value={firstName}
+                    onChange={(e) => setFirstName(e.target.value)}
+                    required
                 />
-
                 <input
-                    className="inputRegistro"
+                    className="inputUsuario"
                     type="text"
-                    placeholder="Categoría"
-                    value={category}
-                    onChange={(e) => setCategory(e.target.value)}
+                    placeholder="Apellido"
+                    value={lastName}
+                    onChange={(e) => setLastName(e.target.value)}
+                    required
                 />
-
                 <input
-                    className="inputRegistro"
-                    type="number"
-                    placeholder="Precio"
-                    value={price}
-                    onChange={(e) => setPrice(e.target.value)}
+                    className="inputUsuario"
+                    type="email"
+                    placeholder="Email"
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                    required
                 />
-
                 <input
-                    className="inputRegistro"
+                    className="inputUsuario"
+                    type="tel"
+                    placeholder="Teléfono"
+                    value={phone}
+                    onChange={(e) => setPhone(e.target.value)}
+                />
+                <input
+                    className="inputUsuario"
                     type="text"
-                    placeholder="Imagen URL"
-                    value={image}
-                    onChange={(e) => setImage(e.target.value)}
+                    placeholder="Calle"
+                    value={street}
+                    onChange={(e) => setStreet(e.target.value)}
                 />
-
-                <textarea
-                    className="inputRegistro textareaRegistro"
-                    placeholder="Descripción"
-                    value={description}
-                    onChange={(e) => setDescription(e.target.value)}
+                <input
+                    className="inputUsuario"
+                    type="text"
+                    placeholder="Ciudad"
+                    value={city}
+                    onChange={(e) => setCity(e.target.value)}
                 />
-
-                <button className="btnRegistro" type="submit" disabled={loading}>
-                    {loading ? 'Guardando...' : 'Registrar'}
+                <button
+                    className="btnRegistrarUsuario"
+                    type="submit"
+                    disabled={saving}
+                >
+                    {saving ? 'Guardando...' : 'Registrar'}
                 </button>
             </form>
         </div>
     );
 }
 
-export default RegistrarProducto;
+export default RegistrarUsuarios;
