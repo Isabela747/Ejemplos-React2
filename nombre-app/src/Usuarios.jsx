@@ -1,103 +1,86 @@
-import React, { useState, useEffect } from 'react'
-import api from './Services/api'
-import './Usuarios.css'
-import './RegistarUsuarios.css'
-import RegistrarUsuarios from './RegistrarUsuarios'
+import React, { useState, useEffect } from 'react';
+import './Usuarios.css';
+import api from './Services/api';
+import RegistrarUsuarios from './RegistrarUsuarios';
 
 function Usuarios() {
-    const [usuarios, setUsuarios] = useState([])
-    const [loading, setLoading] = useState(true)
+const [usuarios, setUsuarios] = useState([]);
+const [loading, setLoading] = useState(true);
+const [usuarioEditado, setUsuarioEditado] = useState(null);
 
-    useEffect(()=>{
-        const obtenerUsuarios = async () => {
-            try{
-                const response = await api.get('/users')
-                setUsuarios(response.data)
-            } catch (error){
-                console.error('Error al obtener los usuarios:', error)
-            } finally{
-                setLoading(false)
-            }
-        }
-        obtenerUsuarios()
-    }, [])
-    
-    if (loading) {
-        return <p>Cargando usuarios...</p>
-    }
-    
-    const handleEditar = (usuario) => {
-        console.log('Editar usuario:', usuario)
-    }
-    
-    const handleEliminar = (id) => {
-        console.log('Eliminar usuario con ID:', id)
-    }
+ const obtenerUsuarios= async() => {
+    try{
+      const response = await api.get('users');
+      setUsuarios(response.data);
+      }catch(error){
+        console.error("Error al obtener usuarios:", error);
+      }finally {
+        setLoading(false);
+      }
+  };
 
-    const handleNewUser = (user) => {
-        setUsuarios((prev) => [...prev, user])
-    }
-    
-    return (
-        <div className="contenedorUsuarios">
-            <RegistrarUsuarios onRegister={handleNewUser} />
+useEffect(() => {
+ 
+  obtenerUsuarios();
+},[])
 
-            {/* solo mostramos la tabla si hay al menos un usuario */}
-            {usuarios.length > 0 && (
-                <>
-                    <h1>Usuarios</h1>
-                    <table className="tablaUsuarios">
-                        <thead>
-                            <tr>
-                                <th>ID</th>
-                                <th>Nombre</th>
-                                <th>Apellido</th>
-                                <th>Email</th>
-                                <th>Teléfono</th>
-                                <th>Dirección</th>
-                                <th>Editar</th>
-                                <th>Eliminar</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {usuarios.map((usuario)=>(
-                                <tr key={usuario.id}>
-                                    <td>{usuario.id}</td>
-                                    <td>{usuario.name?.firstname}</td>
-                                    <td>{usuario.name?.lastname}</td>
-                                    <td>{usuario.email}</td>
-                                    <td>{usuario.phone}</td>
-                                    <td>{usuario.address?.street}, {usuario.address?.city}</td>
-                                    <td>
-                                        <div className="acciones">
-                                            <button
-                                                className="btnEditar"
-                                                onClick={() => handleEditar(usuario)}
-                                                title="Editar"
-                                            >
-                                                Editar
-                                            </button>
-                                        </div>
-                                    </td>
-                                    <td>
-                                        <div className="acciones">
-                                            <button
-                                                className="btnEliminar"
-                                                onClick={() => handleEliminar(usuario.id)}
-                                                title="Eliminar"
-                                            >
-                                                Eliminar
-                                            </button>
-                                        </div>
-                                    </td>
-                                </tr>
-                            ))}
-                        </tbody>
-                    </table>
-                </>
-            )}
-        </div>
-    )
+if(loading){
+  return <p>Cargando usuarios...</p>;
 }
-
+    return (
+        <div className="tabla-usuarios-container">
+              <RegistrarUsuarios 
+              usuarioEditado={usuarioEditado}
+              limpiarSeleccion={() => setUsuarioEditado(null)}
+              onActualizacionExitosa={obtenerUsuarios}
+              />
+            <h2>Usuarios</h2>
+          
+            <table className="tabla-usuarios">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Nombre</th>
+                        <th>Apellidos</th>
+                        <th>Direccion</th>
+                        <th>Telefono</th>
+                        <th>Correo</th>
+                        <th>Editar</th>
+                        <th>Eliminar</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {usuarios.map(usuario => (
+                        <tr key={usuario.id}>
+                            <td>{usuario.id}</td>
+                            <td>{(usuario.name && (usuario.name.firstname || usuario.name.first)) || usuario.username || usuario.email || '—'}</td>
+                            <td>{(usuario.name && usuario.name.lastname) || '—'}</td>
+                            <td>{(usuario.address && (usuario.address.city || usuario.address.street)) || '—'}</td>
+                            <td>{usuario.phone || usuario.telephone || '—'}</td>
+                            <td>{usuario.email || usuario.correo || '—'}</td>
+                            <td>
+                                <button className="btneditar" onClick={() => setUsuarioEditado(usuario)} >Editar</button>
+                            </td>
+                            <td>
+                                <button className="btneliminar" onClick={() => removeUsuario(usuario.id)}>Eliminar</button>
+                            </td>
+                        </tr>
+                    ))}
+                </tbody>
+            </table>
+        </div>
+    );
+}
+  const removeUsuario = async (usuarioId) => {
+        try {
+            const response = await api.delete(
+                `/users/${usuarioId}`
+            );
+            console.log("Usuario eliminado:", response.data);
+            alert("Usuario eliminado exitosamente");
+        } catch (error) {
+            console.error("Error al eliminar usuario:", error);
+            alert("Error al eliminar usuario");
+        }
+    }
 export default Usuarios;

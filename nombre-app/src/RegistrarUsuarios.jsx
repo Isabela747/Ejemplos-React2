@@ -1,117 +1,115 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
 import api from './Services/api';
 import './RegistarUsuarios.css';
 
-function RegistrarUsuarios({ onRegister }) {
-    const [firstName, setFirstName] = useState('');
-    const [lastName, setLastName] = useState('');
+
+function RegistrarUsuarios({ usuarioEditado, limpiarSeleccion, onActualizacionExitosa }) {
+    const [username, setUsername] = useState('');
     const [email, setEmail] = useState('');
-    const [phone, setPhone] = useState('');
-    const [street, setStreet] = useState('');
-    const [city, setCity] = useState('');
-    const [saving, setSaving] = useState(false);
+    const [password, setPassword] = useState('');
+    useEffect(() => {
+        if (usuarioEditado) {
+            setUsername(usuarioEditado.username);
+            setEmail(usuarioEditado.email);
+            setPassword('');
+        }
+        else {
+           resetForm();
+        }
+    }, [usuarioEditado]);
+
+    const resetForm = () => {
+        setUsername('');
+        setEmail('');
+        setPassword('');
+    }
 
     const handleSubmit = async (e) => {
         e.preventDefault();
+       
+
 
         const nuevoUsuario = {
-            name: {
-                firstname: firstName,
-                lastname: lastName,
-            },
-            email,
-            phone,
-            address: {
-                street,
-                city,
-            },
-        };
+  email,
+  username,
+  password,
+  name: {
+    firstname: username,
+    lastname: "Usuario"
+  },
+  address: {
+    city: "CDMX",
+    street: "Calle Falsa",
+    number: 123,
+    zipcode: "12345",
+    geolocation: {
+      lat: "0",
+      long: "0"
+    }
+  },
+  phone: "1234567890"
+};
+
+
+
+
+
+
+
+
+
+
 
         try {
-            setSaving(true);
-            const resp = await api.post('/users', nuevoUsuario);
-            console.log('Usuario registrado:', resp.data);
-            alert('¡Usuario registrado exitosamente!');
-         
-            if (onRegister) {
-                onRegister(resp.data);
+            if(usuarioEditado){
+                const respuesta = await api.put(`/users/${usuarioEditado.id}`, nuevoUsuario);
+                console.log('!Usuario actualizado: ', respuesta.data);
+                alert('Usuario actualizado exitosamente');
+                limpiarSeleccion();
+            }else{
+                const respuesta = await api.post('/users', nuevoUsuario);
+                console.log('!Usuario registrado: ', respuesta.data);
+                alert('Usuario registrado exitosamente');
             }
-            
-            setFirstName('');
-            setLastName('');
-            setEmail('');
-            setPhone('');
-            setStreet('');
-            setCity('');
+
+            resetForm();
+            if (onActualizacionExitosa) onActualizacionExitosa();
         } catch (error) {
-            console.error('Error al registrar el usuario:', error);
-            alert('No se pudo registrar el usuario.');
-        } finally {
-            setSaving(false);
+            alert('Error al registrar usuario');
         }
-    };
+    }
 
     return (
-        <div className="contenedorUsuarios">
+        <div>
             <h2>Registrar Usuario</h2>
+            <form onSubmit={handleSubmit}>
+                <label>Nombre de Usuario
+                    <input type="text"
+                    placeholder = "Nombre de Usuario"
+                        value={username}
+                        onChange={(e) => setUsername(e.target.value)} />
+                </label>
+                <br />
+                <label>Email
+                    <input type="email"
+                        placeholder = "Correo Electrónico"
+                        value={email}
+                        onChange={(e) => setEmail(e.target.value)} />
+                </label>
+<br />
+                <label>Contraseña
+                    <input type="password"
+                    placeholder = "Contraseña"
+                        value={password}
+                        onChange={(e) => setPassword(e.target.value)} />
+                </label>
+<br />
+                <button>Guardar Usuario</button>
 
-            
-            <form className="formUsuario" onSubmit={handleSubmit}>
-                <input
-                    className="inputUsuario"
-                    type="text"
-                    placeholder="Nombre"
-                    value={firstName}
-                    onChange={(e) => setFirstName(e.target.value)}
-                    required
-                />
-                <input
-                    className="inputUsuario"
-                    type="text"
-                    placeholder="Apellido"
-                    value={lastName}
-                    onChange={(e) => setLastName(e.target.value)}
-                    required
-                />
-                <input
-                    className="inputUsuario"
-                    type="email"
-                    placeholder="Email"
-                    value={email}
-                    onChange={(e) => setEmail(e.target.value)}
-                    required
-                />
-                <input
-                    className="inputUsuario"
-                    type="tel"
-                    placeholder="Teléfono"
-                    value={phone}
-                    onChange={(e) => setPhone(e.target.value)}
-                />
-                <input
-                    className="inputUsuario"
-                    type="text"
-                    placeholder="Calle"
-                    value={street}
-                    onChange={(e) => setStreet(e.target.value)}
-                />
-                <input
-                    className="inputUsuario"
-                    type="text"
-                    placeholder="Ciudad"
-                    value={city}
-                    onChange={(e) => setCity(e.target.value)}
-                />
-                <button
-                    className="btnRegistrarUsuario"
-                    type="submit"
-                    disabled={saving}
-                >
-                    {saving ? 'Guardando...' : 'Registrar'}
-                </button>
             </form>
         </div>
-    );
+    )
 }
 
 export default RegistrarUsuarios;
