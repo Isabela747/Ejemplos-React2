@@ -1,21 +1,48 @@
 import { useState } from "react";
 import "./Login.css";
+import {useAuth} from './AuthContext'
+import 
 
-function Login() {
 
-  const [usuario, setUsuario] = useState("");
-  const [password, setPassword] = useState("");
 
-  const handleSubmit = (e) => {
+ const Login =({}) => {
+
+  const [usuario, setUsuario] = useState('');
+  const [password, setPassword] = useState('');
+
+
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log("Usuario:", usuario);
-    console.log("Password:", password);
+   const credenciales = {usuario, password}
+  
+
+  try{
+    const respuesta = await api.post('/auth/Login/', credenciales);
+    console.log ("Respuesta del servidor", respuesta.data.token);
+    if (respuesta.data.token){
+      Login(respuesta.data.token);
+      alert('Autenticacion autorizada');
+    }else{
+      alert('Credenciales invalidas');
+
+    }
+
+  }catch (error){
+    alert ('Error', error);
+    console.error("Error", error);
+  }
+
   };
+
+
 
   const handleCancel = () => {
     setUsuario("");
     setPassword("");
   };
+
+
 
   return (
     <div className="login-container">
@@ -63,5 +90,7 @@ function Login() {
     </div>
   );
 }
+
+
 
 export default Login;
