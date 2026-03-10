@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { useAuth } from './AuthContext'; 
-import './inicioSesion.css';
-import api from './Services/api';
+import './Login.css';
+import api from './Services/api.js';
 
 const Login = ({chVista}) => {
     const { login } = useAuth(); 

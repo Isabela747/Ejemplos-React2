@@ -1,9 +1,4 @@
-/* =========================================
-   Inicio de Sesión
-   Paleta: Tonos azules claros y limpios
-========================================= */
 
-/* Tarjeta principal centrada */
 .inicioSesion {
   background-color: #ffffff;
   width: 100%;
@@ -12,7 +7,6 @@
   padding: 2.5rem;
   border-radius: 16px;
   border: 1px solid #e0f2fe;
-  box-shadow: 0 10px 30px rgba(173, 232, 244, 0.5);
   font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
   transition: transform 0.3s ease, box-shadow 0.3s ease;
   box-sizing: border-box;
@@ -89,7 +83,7 @@
   background-color: #0077b6;
   color: #ffffff;
   border: none;
-  box-shadow: 0 4px 10px rgba(0, 119, 182, 0.3);
+
 }
 
 .inicioSesion button[type="submit"]:hover {
@@ -102,7 +96,7 @@
 .inicioSesion button[type="button"] {
   background-color: #ffffff;
   color: #0077b6;
-  border: 2px solid #e0f2fe;
+  border: 2px;
   margin-top: 0; /* Para que quede pegadito al de enviar */
 }
 
