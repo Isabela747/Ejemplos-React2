@@ -9,26 +9,26 @@ import PropTypes from 'prop-types';
 import Clima from './Clima';
 import { useAuth } from './AuthContext';
 
-function Encabezado({cambiarVista}){
+function Encabezado({ cambiarVista }) {
     return (
         <div className='encabezadoDiv'>
             <Logotipo />
-            <Menu cambiarVista={cambiarVista}/>
+            <Menu cambiarVista={cambiarVista} />
             <Redes />
         </div>
     )
 }
 
-function Logotipo(){
+function Logotipo() {
     return (
         <div className='logoDiv'>
-            <img src={miImagen} alt='Logotipo'/>
+            <img src={miImagen} alt='Logotipo' />
         </div>
     )
 }
 
-function Menu({cambiarVista}){
-    const {isLoggedIn} = useAuth;
+function Menu({ cambiarVista }) {
+    const { isLoggedIn, logout } = useAuth();
     return (
         <div className='menuDiv'>
             <ul>
@@ -38,46 +38,49 @@ function Menu({cambiarVista}){
                 <li onClick={() => cambiarVista("Galeria")}>Galeria</li>
                 <li onClick={() => cambiarVista("Sucursales")}>Sucursales</li>
                 <li onClick={() => cambiarVista("Contacto")}>Contacto</li>
-                
+
 
                 {isLoggedIn ? (
                     <>
-                    <li onClick={() => cambiarVista("Usuarios")}>Usuarios</li>
-                     <li onClick={() => cambiarVista("Carritos")}>Carritos</li>
-                     <li>Cerrar Sesion</li>
+                        <li onClick={() => cambiarVista("Usuarios")}>Usuarios</li>
+                        <li onClick={() => cambiarVista("Carritos")}>Carritos</li>
+                        <li onClick={() => cambiarVista ("Categorias")}>Categorias</li>
+                        <li onClick={() => { logout(); cambiarVista("Inicio"); }}>
+                            Cerrar Sesion
+                        </li>
 
                     </>
-                    ) : (
-                        <li onClick={() => cambiarVista("Login")}>Iniciar Sesion</li>
-                    )}
-                
+                ) : (
+                    <li onClick={() => cambiarVista("Login")}>Iniciar Sesion</li>
+                )}
+
             </ul>
         </div>
     )
 }
 
-function Redes(){
+function Redes() {
     return (
         <div className='redesDiv'>
             <ul>
-                <li><a href=''><img src={face} alt='Logotipo'/></a></li>
-                <li><a href=''><img src={instagram} alt='Logotipo'/></a></li>
-                <li><a href=''><img src={x} alt='Logotipo'/></a></li>
-                <li><a href=''><img src={youtube} alt='Logotipo'/></a></li>
-                <li><a href=''><img src={linkedin} alt='Logotipo'/></a></li>
+                <li><a href=''><img src={face} alt='Logotipo' /></a></li>
+                <li><a href=''><img src={instagram} alt='Logotipo' /></a></li>
+                <li><a href=''><img src={x} alt='Logotipo' /></a></li>
+                <li><a href=''><img src={youtube} alt='Logotipo' /></a></li>
+                <li><a href=''><img src={linkedin} alt='Logotipo' /></a></li>
             </ul>
             <Clima />
 
-             
+
         </div>
-        
+
     )
 }
 Menu.propTypes = {
-  cambiarVista: PropTypes.func.isRequired
+    cambiarVista: PropTypes.func.isRequired
 };
 
 Encabezado.propTypes = {
-  cambiarVista: PropTypes.func.isRequired
+    cambiarVista: PropTypes.func.isRequired
 };
 export default Encabezado

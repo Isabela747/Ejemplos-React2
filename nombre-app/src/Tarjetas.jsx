@@ -12,7 +12,9 @@ import Usuarios from './Usuarios'
 import Carrito from './Carrito'
 import Login from './Login'
 
-function Tarjetas({vista}){
+
+function Tarjetas({vista, chVista}){
+
     const vistas={
         Inicio: <Inicio />,
         AcercaDe: <AcercaDe />,
@@ -22,8 +24,10 @@ function Tarjetas({vista}){
         Usuarios: <Usuarios />,
         Carritos: <Carrito />,
         Contacto: <Contacto />,
-        Login: <Login chVista={(vista) => this.setState({ vista })} />
+        Login: <Login chVista={chVista} />
+        
     }
+
     return (
         <div className='ContenedorDiv'>
             {vistas[vista] || <Inicio />}

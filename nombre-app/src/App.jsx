@@ -4,23 +4,19 @@ import Encabezado from "./Encabezado";
 import Footer from "./Footer";
 import Promos from "./Promos";
 import { AuthProvider } from "./AuthContext";
-import Login from "./Login";
 
 function App() {
   const [vista, setVista] = useState("Inicio");
 
   return (
-    
-      <div className="app-container">
-        <AuthProvider>
+    <div className="app-container">
+      <AuthProvider>
         <Encabezado cambiarVista={setVista} />
-        <Tarjetas vista={vista} />
+        <Tarjetas vista={vista} chVista={setVista} />
         <Promos />
-        <Login/>
-         </AuthProvider>
-        <Footer />
-      </div>
-   
+      </AuthProvider>
+      <Footer />
+    </div>
   );
 }
 
