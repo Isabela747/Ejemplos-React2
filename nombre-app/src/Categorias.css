@@ -1,0 +1,66 @@
+/* Contenedor principal */
+.productos-wrapper{
+    padding: 20px;
+    background: #f5f5f5;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+/* Título */
+.header-titulo{
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.miku-main-title{
+    font-size: 2rem;
+    color: #333;
+}
+
+/* Grid de productos */
+.classMain{
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 20px;
+}
+
+/* Card */
+.product-card{
+    background: #79a9ca;
+    border-radius: 10px;
+    padding: 15px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    text-align: center;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.product-card:hover{
+    transform: translateY(-5px);
+    box-shadow: 0 6px 15px rgba(0,0,0,0.15);
+}
+
+/* Imagen */
+.product-image-container img{
+    width: 100%;
+    height: 160px;
+    object-fit: cover;
+    border-radius: 8px;
+}
+
+/* Texto */
+.product-title{
+    font-size: 1.2rem;
+    margin: 10px 0;
+    color: #222;
+}
+
+.product-category{
+    font-size: 0.9rem;
+    color: #555;
+    display: block;
+    margin-bottom: 8px;
+}
+
+.product-id{
+    font-size: 0.8rem;
+    color: #888;
+}

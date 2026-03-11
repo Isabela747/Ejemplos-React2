@@ -11,6 +11,7 @@ import Sucursales from './Sucursales'
 import Usuarios from './Usuarios'
 import Carrito from './Carrito'
 import Login from './Login'
+import Categorias from './Categorias'
 
 
 function Tarjetas({vista, chVista}){
@@ -24,7 +25,8 @@ function Tarjetas({vista, chVista}){
         Usuarios: <Usuarios />,
         Carritos: <Carrito />,
         Contacto: <Contacto />,
-        Login: <Login chVista={chVista} />
+        Login: <Login chVista={chVista} />,
+        Categorias: <Categorias />
         
     }
 

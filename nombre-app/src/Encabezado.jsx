@@ -8,6 +8,7 @@ import './Encabezado.css'
 import PropTypes from 'prop-types';
 import Clima from './Clima';
 import { useAuth } from './AuthContext';
+import Categorias from './Categorias';
 
 function Encabezado({ cambiarVista }) {
     return (
